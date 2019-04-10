@@ -601,8 +601,13 @@ namespace WinGifTool
             }
         }
         #endregion
-
+        /// <summary>
+        /// GIF每帧之间的间隔数组
+        /// </summary>
         int[] delays = null;
+        /// <summary>
+        /// GIF每帧之间的间隔数组索引
+        /// </summary>
         int delaysIndex = 0;
         /// <summary>
         /// 播放
@@ -614,6 +619,9 @@ namespace WinGifTool
             lblProgress.Text = "";
             if (!string.IsNullOrEmpty(txtFilePath.Text) && File.Exists(txtFilePath.Text))
             {
+                delays = null;
+                delaysIndex = 0;
+                timer1NowI = 0;
                 IsPlay = true;
                 beginZhen = int.Parse(txtPlayBeginZhen.Text);//播放开始帧数
                 beiSu = double.Parse(txtPlayBeiSu.Text);//播放倍速
@@ -720,8 +728,17 @@ namespace WinGifTool
         Bitmap animatedGif = null;
         Graphics g = null;
         FrameDimension frameDimension = null;
+        /// <summary>
+        /// timer1要播放的当前帧数
+        /// </summary>
         int timer1NowI = 0;
+        /// <summary>
+        /// 播放开始帧数
+        /// </summary>
         int beginZhen = 0;//播放开始帧数
+        /// <summary>
+        /// 播放倍速
+        /// </summary>
         double beiSu = 0;//播放倍速
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -772,6 +789,8 @@ namespace WinGifTool
         private void btnStop_Click(object sender, EventArgs e)
         {
             IsPlay = false;
+            timer1.Enabled = false;
+            timer1NowI = 0;
         }
     }
     /// <summary>      
