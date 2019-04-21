@@ -310,7 +310,11 @@ namespace WinGifTool
                 }
             }
         }
-
+        /// <summary>
+        /// 限制只能输入数字
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             if ((e.KeyChar >= (char)48 && e.KeyChar <= (char)57) || e.KeyChar == (char)Keys.Delete || e.KeyChar == (char)Keys.Back)
@@ -321,7 +325,11 @@ namespace WinGifTool
                 e.Handled = true;
             }
         }
-
+        /// <summary>
+        /// 获取图片信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLoadImgInfo_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtFilePath.Text) && File.Exists(txtFilePath.Text))
@@ -339,7 +347,11 @@ namespace WinGifTool
                 res.Dispose();
             }
         }
-
+        /// <summary>
+        /// 预览指定帧
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnShowZhen_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtFilePath.Text) && File.Exists(txtFilePath.Text))
@@ -550,7 +562,11 @@ namespace WinGifTool
                 }
             }
         }
-
+        /// <summary>
+        /// 上X帧
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPrevX_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtFilePath.Text) && File.Exists(txtFilePath.Text))
@@ -575,7 +591,11 @@ namespace WinGifTool
                 }
             }
         }
-
+        /// <summary>
+        /// 下X帧
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnNextX_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txtFilePath.Text) && File.Exists(txtFilePath.Text))
