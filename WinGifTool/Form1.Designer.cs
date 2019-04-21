@@ -139,15 +139,19 @@
             // 
             // pbShow
             // 
+            this.pbShow.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pbShow.Location = new System.Drawing.Point(349, 14);
             this.pbShow.Name = "pbShow";
-            this.pbShow.Size = new System.Drawing.Size(341, 310);
+            this.pbShow.Size = new System.Drawing.Size(364, 325);
             this.pbShow.TabIndex = 8;
             this.pbShow.TabStop = false;
             // 
             // btnShowZhen
             // 
-            this.btnShowZhen.Location = new System.Drawing.Point(504, 361);
+            this.btnShowZhen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnShowZhen.Location = new System.Drawing.Point(551, 387);
             this.btnShowZhen.Name = "btnShowZhen";
             this.btnShowZhen.Size = new System.Drawing.Size(50, 23);
             this.btnShowZhen.TabIndex = 9;
@@ -157,8 +161,9 @@
             // 
             // label3
             // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(349, 366);
+            this.label3.Location = new System.Drawing.Point(396, 392);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 12);
             this.label3.TabIndex = 10;
@@ -166,15 +171,18 @@
             // 
             // txtGifZhen
             // 
-            this.txtGifZhen.Location = new System.Drawing.Point(404, 363);
+            this.txtGifZhen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtGifZhen.Location = new System.Drawing.Point(451, 389);
             this.txtGifZhen.Name = "txtGifZhen";
             this.txtGifZhen.Size = new System.Drawing.Size(92, 21);
             this.txtGifZhen.TabIndex = 11;
+            this.txtGifZhen.Text = "0";
             this.txtGifZhen.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // btnPrev
             // 
-            this.btnPrev.Location = new System.Drawing.Point(560, 361);
+            this.btnPrev.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrev.Location = new System.Drawing.Point(607, 387);
             this.btnPrev.Name = "btnPrev";
             this.btnPrev.Size = new System.Drawing.Size(50, 23);
             this.btnPrev.TabIndex = 12;
@@ -184,7 +192,8 @@
             // 
             // btnNext
             // 
-            this.btnNext.Location = new System.Drawing.Point(616, 361);
+            this.btnNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNext.Location = new System.Drawing.Point(663, 387);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(50, 23);
             this.btnNext.TabIndex = 13;
@@ -194,8 +203,9 @@
             // 
             // lblPicInfo
             // 
+            this.lblPicInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblPicInfo.AutoSize = true;
-            this.lblPicInfo.Location = new System.Drawing.Point(349, 337);
+            this.lblPicInfo.Location = new System.Drawing.Point(396, 363);
             this.lblPicInfo.Name = "lblPicInfo";
             this.lblPicInfo.Size = new System.Drawing.Size(65, 12);
             this.lblPicInfo.TabIndex = 14;
@@ -212,7 +222,8 @@
             // 
             // btnLoadImgInfo
             // 
-            this.btnLoadImgInfo.Location = new System.Drawing.Point(591, 332);
+            this.btnLoadImgInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnLoadImgInfo.Location = new System.Drawing.Point(638, 358);
             this.btnLoadImgInfo.Name = "btnLoadImgInfo";
             this.btnLoadImgInfo.Size = new System.Drawing.Size(75, 23);
             this.btnLoadImgInfo.TabIndex = 16;
@@ -222,7 +233,8 @@
             // 
             // txtGifZhenX
             // 
-            this.txtGifZhenX.Location = new System.Drawing.Point(404, 390);
+            this.txtGifZhenX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtGifZhenX.Location = new System.Drawing.Point(451, 416);
             this.txtGifZhenX.Name = "txtGifZhenX";
             this.txtGifZhenX.Size = new System.Drawing.Size(92, 21);
             this.txtGifZhenX.TabIndex = 18;
@@ -230,8 +242,9 @@
             // 
             // label4
             // 
+            this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(349, 393);
+            this.label4.Location = new System.Drawing.Point(396, 419);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 12);
             this.label4.TabIndex = 17;
@@ -239,7 +252,8 @@
             // 
             // btnNextX
             // 
-            this.btnNextX.Location = new System.Drawing.Point(560, 388);
+            this.btnNextX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnNextX.Location = new System.Drawing.Point(607, 414);
             this.btnNextX.Name = "btnNextX";
             this.btnNextX.Size = new System.Drawing.Size(50, 23);
             this.btnNextX.TabIndex = 20;
@@ -249,7 +263,8 @@
             // 
             // btnPrevX
             // 
-            this.btnPrevX.Location = new System.Drawing.Point(504, 388);
+            this.btnPrevX.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPrevX.Location = new System.Drawing.Point(551, 414);
             this.btnPrevX.Name = "btnPrevX";
             this.btnPrevX.Size = new System.Drawing.Size(50, 23);
             this.btnPrevX.TabIndex = 19;
@@ -259,7 +274,8 @@
             // 
             // btnPlay
             // 
-            this.btnPlay.Location = new System.Drawing.Point(560, 417);
+            this.btnPlay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPlay.Location = new System.Drawing.Point(607, 443);
             this.btnPlay.Name = "btnPlay";
             this.btnPlay.Size = new System.Drawing.Size(50, 23);
             this.btnPlay.TabIndex = 21;
@@ -269,7 +285,8 @@
             // 
             // txtPlayBeginZhen
             // 
-            this.txtPlayBeginZhen.Location = new System.Drawing.Point(404, 419);
+            this.txtPlayBeginZhen.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPlayBeginZhen.Location = new System.Drawing.Point(451, 445);
             this.txtPlayBeginZhen.Name = "txtPlayBeginZhen";
             this.txtPlayBeginZhen.Size = new System.Drawing.Size(45, 21);
             this.txtPlayBeginZhen.TabIndex = 23;
@@ -278,8 +295,9 @@
             // 
             // label5
             // 
+            this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(349, 422);
+            this.label5.Location = new System.Drawing.Point(396, 448);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 12);
             this.label5.TabIndex = 22;
@@ -287,7 +305,8 @@
             // 
             // btnStop
             // 
-            this.btnStop.Location = new System.Drawing.Point(616, 417);
+            this.btnStop.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnStop.Location = new System.Drawing.Point(663, 443);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(50, 23);
             this.btnStop.TabIndex = 24;
@@ -297,8 +316,9 @@
             // 
             // label6
             // 
+            this.label6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(467, 422);
+            this.label6.Location = new System.Drawing.Point(514, 448);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(29, 12);
             this.label6.TabIndex = 25;
@@ -306,7 +326,8 @@
             // 
             // txtPlayBeiSu
             // 
-            this.txtPlayBeiSu.Location = new System.Drawing.Point(504, 419);
+            this.txtPlayBeiSu.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtPlayBeiSu.Location = new System.Drawing.Point(551, 445);
             this.txtPlayBeiSu.Name = "txtPlayBeiSu";
             this.txtPlayBeiSu.Size = new System.Drawing.Size(50, 21);
             this.txtPlayBeiSu.TabIndex = 26;
@@ -319,8 +340,9 @@
             // 
             // lblProgress
             // 
+            this.lblProgress.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblProgress.AutoSize = true;
-            this.lblProgress.Location = new System.Drawing.Point(502, 337);
+            this.lblProgress.Location = new System.Drawing.Point(549, 363);
             this.lblProgress.Name = "lblProgress";
             this.lblProgress.Size = new System.Drawing.Size(0, 12);
             this.lblProgress.TabIndex = 27;
@@ -330,7 +352,7 @@
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(730, 469);
+            this.ClientSize = new System.Drawing.Size(726, 476);
             this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.txtPlayBeiSu);
             this.Controls.Add(this.label6);

@@ -386,7 +386,6 @@ namespace WinGifTool
 
                 for (int i = 0; i < count; i++)
                 {
-                    forIndex++;
                     res.SelectActiveFrame(f, i);
                     if (0 == i)
                     {
@@ -408,6 +407,7 @@ namespace WinGifTool
                         }
                         //gif.SaveAdd(frame, eps);
                     }
+                    forIndex++;
                 }
 
                 //eps = new EncoderParameters(1);
@@ -751,7 +751,7 @@ namespace WinGifTool
                     {
                         for (int i = timer1NowI; i <= animatedGif.GetFrameCount(frameDimension) - 1; i++)
                         {
-                            lblProgress.Text = (i.ToString() + "帧 " + ((double)i / (double)lastImageCount).ToString("0.00") + "%");
+                            lblProgress.Text = (i.ToString() + "帧 " + (((double)(i + 1) / (double)lastImageCount) * 100).ToString("0.00") + "%");
                             timer1NowI++;
                             if (i >= beginZhen)
                             {
@@ -770,8 +770,26 @@ namespace WinGifTool
                         }
                     }
                 }
-                timer1.Interval = (int)(delays[delaysIndex] * 10 * beiSu);
-                timer1.Enabled = true;
+                int intInterval = (int)(delays[delaysIndex] * 10 * beiSu);
+                if (intInterval > 0)
+                {
+                    timer1.Interval = intInterval;
+                    timer1.Enabled = true;
+                }
+                else
+                {
+                    if (delaysIndex == delays.Length - 1)
+                    {
+                        delaysIndex = 0;
+                        timer1.Interval = 1000;
+                        timer1.Enabled = true;
+                    }
+                    else
+                    {
+                        timer1.Interval = 10;
+                        timer1.Enabled = true;
+                    }
+                }
                 delaysIndex++;
             }
             else
@@ -791,127 +809,6 @@ namespace WinGifTool
             IsPlay = false;
             timer1.Enabled = false;
             timer1NowI = 0;
-        }
-    }
-    /// <summary>      
-    /// 表示一类带动画功能的图像。      
-    /// </summary>      
-    public class AnimateImage
-    {
-        Image image;
-        FrameDimension frameDimension;
-        /// <summary>      
-        /// 动画当前帧发生改变时触发。      
-        /// </summary>      
-        public event EventHandler<EventArgs> OnFrameChanged;
-
-        /// <summary>      
-        /// 实例化一个AnimateImage。      
-        /// </summary>      
-        /// <param name="img">动画图片。</param>      
-        public AnimateImage(Image img)
-        {
-            image = img;
-            lock (image)
-            {
-                mCanAnimate = ImageAnimator.CanAnimate(image);
-                if (mCanAnimate)
-                {
-                    Guid[] guid = image.FrameDimensionsList;
-                    mFrameCount = image.GetFrameCount(frameDimension);
-                }
-            }
-        }
-
-        bool mCanAnimate;
-        int mFrameCount = 1, mCurrentFrame = 0;
-
-        /// <summary>      
-        /// 图片。      
-        /// </summary>      
-        public Image Image
-        {
-            get { return image; }
-        }
-
-        /// <summary>      
-        /// 是否动画。      
-        /// </summary>      
-        public bool CanAnimate
-        {
-            get { return mCanAnimate; }
-        }
-
-        /// <summary>      
-        /// 总帧数。      
-        /// </summary>      
-        public int FrameCount
-        {
-            get { return mFrameCount; }
-        }
-
-        /// <summary>      
-        /// 播放的当前帧。      
-        /// </summary>      
-        public int CurrentFrame
-        {
-            get { return mCurrentFrame; }
-        }
-        /// <summary>      
-        /// 播放这个动画。      
-        /// </summary>      
-        public void Play()
-        {
-            if (mCanAnimate)
-            {
-                lock (image)
-                {
-                    ImageAnimator.Animate(image, new EventHandler(FrameChanged));
-                }
-            }
-        }
-
-        /// <summary>      
-        /// 停止播放。      
-        /// </summary>      
-        public void Stop()
-        {
-            if (mCanAnimate)
-            {
-                lock (image)
-                {
-                    ImageAnimator.StopAnimate(image, new EventHandler(FrameChanged));
-                }
-            }
-        }
-
-        /// <summary>      
-        /// 重置动画，使之停止在第0帧位置上。      
-        /// </summary>      
-        public void Reset()
-        {
-            if (mCanAnimate)
-            {
-                ImageAnimator.StopAnimate(image, new EventHandler(FrameChanged));
-                lock (image)
-                {
-                    image.SelectActiveFrame(frameDimension, 0);
-                    mCurrentFrame = 0;
-                }
-            }
-        }
-
-        private void FrameChanged(object sender, EventArgs e)
-        {
-            mCurrentFrame = mCurrentFrame + 1 >= mFrameCount ? 0 : mCurrentFrame + 1;
-            lock (image)
-            {
-                image.SelectActiveFrame(frameDimension, mCurrentFrame);
-            }
-            if (OnFrameChanged != null)
-            {
-                OnFrameChanged(image, e);
-            }
         }
     }
 }
