@@ -58,6 +58,8 @@
             this.txtPlayBeiSu = new System.Windows.Forms.TextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.lblProgress = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.btnDaoFang = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbShow)).BeginInit();
             this.SuspendLayout();
             // 
@@ -238,6 +240,7 @@
             this.txtGifZhenX.Name = "txtGifZhenX";
             this.txtGifZhenX.Size = new System.Drawing.Size(92, 21);
             this.txtGifZhenX.TabIndex = 18;
+            this.txtGifZhenX.Text = "5";
             this.txtGifZhenX.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // label4
@@ -344,8 +347,29 @@
             this.lblProgress.AutoSize = true;
             this.lblProgress.Location = new System.Drawing.Point(549, 363);
             this.lblProgress.Name = "lblProgress";
-            this.lblProgress.Size = new System.Drawing.Size(0, 12);
+            this.lblProgress.Size = new System.Drawing.Size(71, 12);
             this.lblProgress.TabIndex = 27;
+            this.lblProgress.Text = "lblProgress";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 169);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(311, 96);
+            this.label7.TabIndex = 28;
+            this.label7.Text = "压缩\r\n\r\n1：拖动图片至窗体或点击选择文件\r\n\r\n2：填写压缩比例\r\n\r\n3：选择压缩模式，成功后会在桌面新建压缩后的图片文件\r\n\r\n";
+            // 
+            // btnDaoFang
+            // 
+            this.btnDaoFang.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDaoFang.Location = new System.Drawing.Point(664, 414);
+            this.btnDaoFang.Name = "btnDaoFang";
+            this.btnDaoFang.Size = new System.Drawing.Size(50, 23);
+            this.btnDaoFang.TabIndex = 29;
+            this.btnDaoFang.Text = "倒放";
+            this.btnDaoFang.UseVisualStyleBackColor = true;
+            this.btnDaoFang.Click += new System.EventHandler(this.btnDaoFang_Click);
             // 
             // Form1
             // 
@@ -353,6 +377,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(726, 476);
+            this.Controls.Add(this.btnDaoFang);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.txtPlayBeiSu);
             this.Controls.Add(this.label6);
@@ -425,6 +451,8 @@
         private System.Windows.Forms.TextBox txtPlayBeiSu;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label lblProgress;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button btnDaoFang;
     }
 }
 

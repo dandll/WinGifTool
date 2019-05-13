@@ -241,3 +241,5 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 /WinGifTool190421.zip
+/WinGifTool.exe - 快捷方式.lnk
+/WinGifTool20190507.zip

@@ -37,6 +37,7 @@ namespace WinGifTool
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            lblProgress.Text = "";
             //image = new AnimateImage(Image.FromFile(@"C:/Documents and Settings/Administrator/My Documents/My Pictures/未命名.gif"));
             //image.OnFrameChanged += new EventHandler<EventArgs>(image_OnFrameChanged);
             //SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
@@ -64,6 +65,7 @@ namespace WinGifTool
             {
                 string fName = ofd.FileName;
                 txtFilePath.Text = fName;
+                btnLoadImgInfo_Click(null, null);
             }
         }
 
@@ -517,7 +519,7 @@ namespace WinGifTool
         }
         #endregion
 
-        #region 帧操作
+        #region 显示指定帧操作
         /// <summary>
         /// 下一帧
         /// </summary>
@@ -525,20 +527,7 @@ namespace WinGifTool
         /// <param name="e"></param>
         private void btnNext_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtFilePath.Text) && File.Exists(txtFilePath.Text))
-            {
-                int indexImg = 0;
-                if (int.TryParse(txtGifZhen.Text, out indexImg))
-                {
-                    txtGifZhen.Text = (indexImg + 1).ToString();
-                    Image img = GetImg(txtFilePath.Text, indexImg + 1);
-                    if (img != null)
-                    {
-                        pbShow.Image = null;
-                        pbShow.Image = img;
-                    }
-                }
-            }
+            ShowZhiDingZhen(1);
         }
         /// <summary>
         /// 上一帧
@@ -547,20 +536,7 @@ namespace WinGifTool
         /// <param name="e"></param>
         private void btnPrev_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtFilePath.Text) && File.Exists(txtFilePath.Text))
-            {
-                int indexImg = 0;
-                if (int.TryParse(txtGifZhen.Text, out indexImg))
-                {
-                    txtGifZhen.Text = (indexImg - 1).ToString();
-                    Image img = GetImg(txtFilePath.Text, indexImg - 1);
-                    if (img != null)
-                    {
-                        pbShow.Image = null;
-                        pbShow.Image = img;
-                    }
-                }
-            }
+            ShowZhiDingZhen(-1);
         }
         /// <summary>
         /// 上X帧
@@ -569,27 +545,7 @@ namespace WinGifTool
         /// <param name="e"></param>
         private void btnPrevX_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtFilePath.Text) && File.Exists(txtFilePath.Text))
-            {
-                int indexImg = 0;
-                if (int.TryParse(txtGifZhen.Text, out indexImg))
-                {
-                    int indexX = 0;
-                    if (int.TryParse(txtGifZhenX.Text, out indexX))
-                    {
-                        if (indexImg - indexX >= 0)
-                        {
-                            txtGifZhen.Text = (indexImg - indexX).ToString();
-                            Image img = GetImg(txtFilePath.Text, indexImg);
-                            if (img != null)
-                            {
-                                pbShow.Image = null;
-                                pbShow.Image = img;
-                            }
-                        }
-                    }
-                }
-            }
+            ShowZhiDingZhen("-" + txtGifZhenX.Text);
         }
         /// <summary>
         /// 下X帧
@@ -598,23 +554,39 @@ namespace WinGifTool
         /// <param name="e"></param>
         private void btnNextX_Click(object sender, EventArgs e)
         {
+            ShowZhiDingZhen(txtGifZhenX.Text);
+        }
+        /// <summary>
+        /// 显示指定帧图片
+        /// </summary>
+        /// <param name="zhiDingZhenStr">指定帧</param>
+        void ShowZhiDingZhen(string zhiDingZhenStr)
+        {
+            int indexX = 0;
+            if (int.TryParse(zhiDingZhenStr, out indexX))
+            {
+                ShowZhiDingZhen(indexX);
+            }
+        }
+        /// <summary>
+        /// 显示指定帧图片
+        /// </summary>
+        /// <param name="zhiDingZhen">指定帧</param>
+        void ShowZhiDingZhen(int zhiDingZhen)
+        {
             if (!string.IsNullOrEmpty(txtFilePath.Text) && File.Exists(txtFilePath.Text))
             {
                 int indexImg = 0;
                 if (int.TryParse(txtGifZhen.Text, out indexImg))
                 {
-                    int indexX = 0;
-                    if (int.TryParse(txtGifZhenX.Text, out indexX))
+                    if (indexImg - zhiDingZhen >= 0 && indexImg + zhiDingZhen < lastImageCount)
                     {
-                        if (indexImg + indexX < lastImageCount)
+                        txtGifZhen.Text = (indexImg + zhiDingZhen).ToString();
+                        Image img = GetImg(txtFilePath.Text, indexImg + zhiDingZhen);
+                        if (img != null)
                         {
-                            txtGifZhen.Text = (indexImg + indexX).ToString();
-                            Image img = GetImg(txtFilePath.Text, indexImg);
-                            if (img != null)
-                            {
-                                pbShow.Image = null;
-                                pbShow.Image = img;
-                            }
+                            pbShow.Image = null;
+                            pbShow.Image = img;
                         }
                     }
                 }
@@ -630,70 +602,9 @@ namespace WinGifTool
         /// </summary>
         int delaysIndex = 0;
         /// <summary>
-        /// 播放
+        /// 播放循序 true为正序 false为倒序
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnPlay_Click(object sender, EventArgs e)
-        {
-            lblProgress.Text = "";
-            if (!string.IsNullOrEmpty(txtFilePath.Text) && File.Exists(txtFilePath.Text))
-            {
-                delays = null;
-                delaysIndex = 0;
-                timer1NowI = 0;
-                IsPlay = true;
-                beginZhen = int.Parse(txtPlayBeginZhen.Text);//播放开始帧数
-                beiSu = double.Parse(txtPlayBeiSu.Text);//播放倍速
-                animatedGif = new Bitmap(txtFilePath.Text);
-                g = this.pbShow.CreateGraphics();
-                // A Gif image's frame delays are contained in a byte array
-                // in the image's PropertyTagFrameDelay Property Item's
-                // value property.
-                // Retrieve the byte array...
-                int PropertyTagFrameDelay = 0x5100;
-                PropertyItem propItem = animatedGif.GetPropertyItem(PropertyTagFrameDelay);
-                byte[] bytes = propItem.Value;
-                // Get the frame count for the Gif...
-                frameDimension = new FrameDimension(animatedGif.FrameDimensionsList[0]);
-                int frameCount = animatedGif.GetFrameCount(FrameDimension.Time);
-                // Create an array of integers to contain the delays,
-                // in hundredths of a second, between each frame in the Gif image.
-                delays = new int[frameCount + 1];
-                int i = 0;
-                for (i = 0; i <= frameCount - 1; i++)
-                {
-                    delays[i] = BitConverter.ToInt32(bytes, i * 4);
-                }
-                //g.Dispose();
-                //animatedGif.Dispose();
-                timer1.Interval = delays[delaysIndex];
-                timer1.Enabled = true;
-                delaysIndex++;
-
-                // Play the Gif one time...
-                //while (true && !IsFormClose && IsPlay)
-                //{
-                //    for (i = 0; i <= animatedGif.GetFrameCount(frameDimension) - 1; i++)
-                //    {
-                //        if (i >= beginZhen)
-                //        {
-                //            animatedGif.SelectActiveFrame(frameDimension, i);
-                //            g.DrawImage(animatedGif, new Point(0, 0));
-                //            Application.DoEvents();
-                //            Thread.Sleep((int)(delays[i] * 10 * beiSu));
-                //            if (IsFormClose || !IsPlay)
-                //            {
-                //                g.Dispose();
-                //                animatedGif.Dispose();
-                //                break;
-                //            }
-                //        }
-                //    }
-                //    break;
-                //}
-            }
-        }
+        bool boFangShunXu = true;
         void PlayGif()
         {
             //if (!string.IsNullOrEmpty(txtFilePath.Text) && File.Exists(txtFilePath.Text))
@@ -762,32 +673,47 @@ namespace WinGifTool
         double beiSu = 0;//播放倍速
         private void timer1_Tick(object sender, EventArgs e)
         {
-            if (delaysIndex < delays.Length)
+            if (delaysIndex < delays.Length && delaysIndex >= 0 && IsPlay)
             {
                 if (!string.IsNullOrEmpty(txtFilePath.Text) && File.Exists(txtFilePath.Text))
                 {
                     // Play the Gif one time...
-                    if (true && !IsFormClose && IsPlay)
+                    if (true && !IsFormClose)
                     {
                         for (int i = timer1NowI; i <= animatedGif.GetFrameCount(frameDimension) - 1; i++)
                         {
-                            lblProgress.Text = (i.ToString() + "帧 " + (((double)(i + 1) / (double)lastImageCount) * 100).ToString("0.00") + "%");
                             timer1NowI++;
+                            delaysIndex++;
                             if (i >= beginZhen)
                             {
-                                animatedGif.SelectActiveFrame(frameDimension, i);
+                                if (boFangShunXu)
+                                {
+                                    animatedGif.SelectActiveFrame(frameDimension, i);
+                                }
+                                else
+                                {
+                                    animatedGif.SelectActiveFrame(frameDimension, delays.Length - i - 2);
+                                }
                                 g.DrawImage(animatedGif, new Point(0, 0));
-                                Application.DoEvents();
+                                //Application.DoEvents();
                                 //Thread.Sleep((int)(delays[i] * 10 * beiSu));
                                 if (IsFormClose || !IsPlay)
                                 {
                                     g.Dispose();
                                     animatedGif.Dispose();
-                                    break;
                                 }
+                                SetProgressText(i);
                                 break;
                             }
                         }
+                    }
+                    else
+                    {
+                        InitTimerParameter();
+                        timer1.Interval = 1000;
+                        timer1.Enabled = false;
+                        timer1.Enabled = true;
+                        return;
                     }
                 }
                 int intInterval = (int)(delays[delaysIndex] * 10 * beiSu);
@@ -800,21 +726,23 @@ namespace WinGifTool
                 {
                     if (delaysIndex == delays.Length - 1)
                     {
-                        delaysIndex = 0;
+                        InitTimerParameter();
                         timer1.Interval = 1000;
+                        timer1.Enabled = false;
                         timer1.Enabled = true;
                     }
                     else
                     {
                         timer1.Interval = 10;
+                        timer1.Enabled = false;
                         timer1.Enabled = true;
                     }
                 }
-                delaysIndex++;
+                txtPlayBeginZhen.Text = delaysIndex.ToString();
             }
             else
             {
-                timer1.Enabled = false;
+                InitTimerParameter();
                 g.Dispose();
                 animatedGif.Dispose();
             }
@@ -829,6 +757,110 @@ namespace WinGifTool
             IsPlay = false;
             timer1.Enabled = false;
             timer1NowI = 0;
+        }
+        /// <summary>
+        /// 播放
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnPlay_Click(object sender, EventArgs e)
+        {
+            BoFang(true);
+        }
+        /// <summary>
+        /// 倒放
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDaoFang_Click(object sender, EventArgs e)
+        {
+            BoFang(false);
+        }
+        /// <summary>
+        /// 播放方法
+        /// </summary>
+        /// <param name="shunXu">true为正序 false为倒序</param>
+        void BoFang(bool shunXu)
+        {
+            timer1.Enabled = false;
+            boFangShunXu = shunXu;
+            lblProgress.Text = "";
+            if (!string.IsNullOrEmpty(txtFilePath.Text) && File.Exists(txtFilePath.Text))
+            {
+                delays = null;
+                InitTimerParameter();
+                IsPlay = true;
+                beginZhen = int.Parse(txtPlayBeginZhen.Text);//播放开始帧数
+                beiSu = double.Parse(txtPlayBeiSu.Text);//播放倍速
+                animatedGif = new Bitmap(txtFilePath.Text);
+                g = this.pbShow.CreateGraphics();
+                // A Gif image's frame delays are contained in a byte array
+                // in the image's PropertyTagFrameDelay Property Item's
+                // value property.
+                // Retrieve the byte array...
+                int PropertyTagFrameDelay = 0x5100;
+                PropertyItem propItem = animatedGif.GetPropertyItem(PropertyTagFrameDelay);
+                byte[] bytes = propItem.Value;
+                // Get the frame count for the Gif...
+                frameDimension = new FrameDimension(animatedGif.FrameDimensionsList[0]);
+                int frameCount = animatedGif.GetFrameCount(FrameDimension.Time);
+                // Create an array of integers to contain the delays,
+                // in hundredths of a second, between each frame in the Gif image.
+                delays = new int[frameCount + 1];
+                int i = 0;
+                for (i = 0; i <= frameCount - 1; i++)
+                {
+                    delays[i] = BitConverter.ToInt32(bytes, i * 4);
+                }
+                //g.Dispose();
+                //animatedGif.Dispose();
+                timer1.Interval = delays[delaysIndex];
+                timer1.Enabled = true;
+                delaysIndex++;
+                if (beginZhen > 0)
+                {
+                    delaysIndex = beginZhen;
+                    timer1NowI = delaysIndex;
+                }
+                // Play the Gif one time...
+                //while (true && !IsFormClose && IsPlay)
+                //{
+                //    for (i = 0; i <= animatedGif.GetFrameCount(frameDimension) - 1; i++)
+                //    {
+                //        if (i >= beginZhen)
+                //        {
+                //            animatedGif.SelectActiveFrame(frameDimension, i);
+                //            g.DrawImage(animatedGif, new Point(0, 0));
+                //            Application.DoEvents();
+                //            Thread.Sleep((int)(delays[i] * 10 * beiSu));
+                //            if (IsFormClose || !IsPlay)
+                //            {
+                //                g.Dispose();
+                //                animatedGif.Dispose();
+                //                break;
+                //            }
+                //        }
+                //    }
+                //    break;
+                //}
+            }
+        }
+        /// <summary>
+        /// 设置百分比帧数
+        /// </summary>
+        /// <param name="i">当前帧数</param>
+        void SetProgressText(int i)
+        {
+            lblProgress.Text = (i.ToString() + "帧 " + (((double)(i + 1) / (double)lastImageCount) * 100).ToString("0.00") + "%");
+        }
+        /// <summary>
+        /// 初始化计时器相关变量
+        /// </summary>
+        void InitTimerParameter()
+        {
+            delaysIndex = 0;
+            timer1NowI = 0;
+            beginZhen = 0;
         }
     }
 }
