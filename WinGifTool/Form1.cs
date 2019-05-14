@@ -579,7 +579,7 @@ namespace WinGifTool
                 int indexImg = 0;
                 if (int.TryParse(txtGifZhen.Text, out indexImg))
                 {
-                    if (indexImg - zhiDingZhen >= 0 && indexImg + zhiDingZhen < lastImageCount)
+                    if (((zhiDingZhen < 0) && (indexImg - zhiDingZhen >= 0)) || ((zhiDingZhen > 0) && indexImg + zhiDingZhen < lastImageCount))
                     {
                         txtGifZhen.Text = (indexImg + zhiDingZhen).ToString();
                         Image img = GetImg(txtFilePath.Text, indexImg + zhiDingZhen);
