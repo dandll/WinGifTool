@@ -60,6 +60,7 @@
             this.lblProgress = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.btnDaoFang = new System.Windows.Forms.Button();
+            this.btnDaoXuBaoCUn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbShow)).BeginInit();
             this.SuspendLayout();
             // 
@@ -371,12 +372,23 @@
             this.btnDaoFang.UseVisualStyleBackColor = true;
             this.btnDaoFang.Click += new System.EventHandler(this.btnDaoFang_Click);
             // 
+            // btnDaoXuBaoCUn
+            // 
+            this.btnDaoXuBaoCUn.Location = new System.Drawing.Point(226, 107);
+            this.btnDaoXuBaoCUn.Name = "btnDaoXuBaoCUn";
+            this.btnDaoXuBaoCUn.Size = new System.Drawing.Size(75, 23);
+            this.btnDaoXuBaoCUn.TabIndex = 30;
+            this.btnDaoXuBaoCUn.Text = "倒序保存";
+            this.btnDaoXuBaoCUn.UseVisualStyleBackColor = true;
+            this.btnDaoXuBaoCUn.Click += new System.EventHandler(this.btnDaoXuBaoCUn_Click);
+            // 
             // Form1
             // 
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(726, 476);
+            this.Controls.Add(this.btnDaoXuBaoCUn);
             this.Controls.Add(this.btnDaoFang);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.lblProgress);
@@ -453,6 +465,7 @@
         private System.Windows.Forms.Label lblProgress;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnDaoFang;
+        private System.Windows.Forms.Button btnDaoXuBaoCUn;
     }
 }
 
